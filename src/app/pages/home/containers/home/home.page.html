@@ -1,0 +1,34 @@
+<div fxLayout="row">
+    <mat-label>{{text}}</mat-label>
+    <form [formGroup]="form"  (submit)="submit()">
+    <mat-form-field appearance="outline" style="margin-left: 20px;">
+        <input matInput  formControlName="pesquisar" placeholder="Digite aqui a cidade">
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled] ='!form.valid' style="margin-left: 15px;">Pesquisar</button>
+
+</form>
+
+
+
+<div class="form-group" style="width:80%;margin-left: 20px;">
+    <label>Pesquisar com <i>autocomplete</i></label>
+    <jv-cities-typeahead [formControl]="searchControlWithAutocomplete" ></jv-cities-typeahead>
+</div>
+
+<jv-loader *ngIf="loading$  | async"></jv-loader>
+
+
+<div *ngIf="!(loading$ | async) && !(error$ | async ) && !!(cityWeather)">
+    <app-current-weather [cityWeather] = "cityWeather"  
+                         [isFavorite]="isCurrentFavorite$ | async"
+                         [unit]="unit$ | async"
+                         (toggleBookmark)="onToggleBookmark()"
+                         >
+                        </app-current-weather>
+</div>
+
+
+<div *ngIf="!(loading$ | async) && error$ | async">
+    <a>Tentar novamente</a>
+</div>
+</div>

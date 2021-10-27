@@ -1,0 +1,17 @@
+<mat-card>
+
+    <h2>{{cityName}}</h2>
+
+  
+
+    <app-detailed-weather [weather]="cityWeather.weather" [unit]="unit"></app-detailed-weather>
+
+
+    <a mat-raised-button (click)="onToggleBookmark()" > 
+       {{ isFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos' }}
+    </a>
+    <a  [routerLink]="['/details']"  
+    [queryParams]="{ lat: cityWeather.city.coord.lat, lon: cityWeather.city.coord.lon }"> Ver detalhes
+    </a>
+
+</mat-card>
